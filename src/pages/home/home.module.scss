@@ -1,0 +1,103 @@
+.home {
+  text-align: center;
+}
+
+.banner {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 90vh;
+  .welcome-text {
+    font-size: 5vw;
+    font-style: oblique;
+  }
+}
+
+@keyframes arrow {
+  0% {top: 0}
+  50% {top: 10px}
+  100% {top: 0}
+}
+
+.scroll-down {
+  height: 10vh;
+  .arrow {
+    position: relative;
+    background-color: black;
+    left: 10%;
+    width: 6px;
+    height: 18px;
+    animation: arrow 900ms linear infinite;
+    &::after {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 15px;
+      right: -4px;
+      background-color: black;
+      top: 6px;
+      transform: rotate(45deg);
+    }
+    &::before {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 15px;
+      right: 5px;
+      background-color: black;
+      top: 6px;
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+.skills-section {
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  .skills-panel {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    .skills-panel-description {
+      font-size: 2vw;
+      padding-bottom: 15px;
+    }
+    .skill-item {
+      .skill-item-title {
+        font-size: 1.5vw;
+      }
+      .skill-item-description {
+        
+      }
+    }
+  }
+}
+
+.experience-section {
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  background-color: grey;
+  .experience-panel {
+    height: 80%;
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+.projects-section {
+  height: 60vh;
+}
+
+.contact-section {
+  height: 60vh;
+}
