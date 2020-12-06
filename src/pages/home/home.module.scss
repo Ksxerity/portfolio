@@ -33,7 +33,7 @@
       position: absolute;
       width: 60%;
       height: 15px;
-      right: -4px;
+      right: -2px;
       background-color: black;
       top: 6px;
       transform: rotate(45deg);
@@ -43,7 +43,7 @@
       position: absolute;
       width: 60%;
       height: 15px;
-      right: 5px;
+      right: 6px;
       background-color: black;
       top: 6px;
       transform: rotate(-45deg);
@@ -76,7 +76,7 @@
         font-size: 1.5vw;
       }
       .skill-item-description {
-        
+
       }
     }
   }
@@ -96,6 +96,12 @@
 
 .projects-section {
   height: 60vh;
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  .projects-panel {
+    width: 50%;
+  }
 }
 
 .contact-section {

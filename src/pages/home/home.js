@@ -1,11 +1,41 @@
 import React, { Component } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
+import Tabs from 'react-bootstrap/tabs';
+import Tab from 'react-bootstrap/tab';
 import styles from './home.module.scss';
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+    }
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e);
+
+    const form = e.target;
+    const data = new FormData(form);
+    this.handleValidation(data);
+    // const xhr = new XMLHttpRequest();
+    // xhr.open(form.method, form.action);
+    // xhr.setRequestHeader("Accept", "application/json");
+    // xhr.onreadystatechange = () => {
+    //   if (xhr.readyState !== XMLHttpRequest.DONE) return;
+    //   if (xhr.status === 200) {
+    //     form.reset();
+    //     this.setState({ status: "SUCCESS" });
+    //   } else {
+    //     this.setState({ status: "ERROR" });
+    //   }
+    // };
+    // xhr.send(data);
+  }
+
+  handleValidation = (data) => {
+    for (const [key, val] of data.entries()) {
+      console.log(key + ',' + val)
     }
   }
 
@@ -75,11 +105,39 @@ export default class Home extends Component {
           </Carousel>
         </div>
         <div name="projects" className={styles["projects-section"]}>
-          projects? with carousel? Or perhaps a different way to show it
+          <div className={styles["projects-panel"]}>
+            <Tabs>
+              <Tab eventKey="project1" title="Project1">
+                Project 1
+            </Tab>
+              <Tab eventKey="project2" title="Project2">
+                Project 2
+            </Tab>
+              <Tab eventKey="project3" title="Project3">
+                Project 3
+            </Tab>
+            </Tabs>
+          </div>
         </div>
         <div name="contact" className={styles["contact-section"]}>
-          Email address
-          Form for inputting message
+          <div className={styles["contact-panel"]}>
+            Contact Me
+            <form method="POST" action="https://formspree.io/f/mwkwreoe" onSubmit={this.handleSubmit} noValidate>
+              <div className={styles["contact-name"]}>
+                name
+                <input type="text" name="name"></input>
+              </div>
+              <div className={styles["contact-email"]}>
+                email
+                <input type="email" name="email"></input>
+              </div>
+              <div className={styles["contact-message"]}>
+                message
+                <input type="text" name="message"></input>
+              </div>
+              <button>Submit</button>
+            </form>
+          </div>
         </div>
         <div>
           Footer?
