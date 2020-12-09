@@ -102,12 +102,39 @@
 .experience-section {
   height: 60vh;
   display: flex;
+  flex-direction: column;
+  font-size: 4vw;
   align-items: center;
   background-color: grey;
   .experience-panel {
     height: 80%;
     width: 80%;
     margin: 0 auto;
+    .experience-item {
+      width: 85%;
+      padding-left: 15%;
+      text-align: left;
+      .experience-title {
+        font-size: 3vw;
+        padding-top: 10px;
+        line-height: 80%;
+      }
+      .experience-position {
+        font-size: 2vw;
+        border-bottom: 2px solid black;
+      }
+      .experience-description {
+        padding-top: 10px;
+        padding-bottom: 15px;
+        font-size: 1.5vw;
+      }
+      .experience-skills {
+        font-size: 1vw;
+      }
+      .experience-duration {
+        font-size: 1vw;
+      }
+    }
   }
 }
 
@@ -123,4 +150,25 @@
 
 .contact-section {
   height: 60vh;
+  .contact-name {
+    input {
+      margin-left: 10px;
+      display: inline-block;
+      width: 20%;
+    }
+  }
+  .contact-email {
+    input {
+      margin-left: 10px;
+      display: inline-block;
+      width: 20%;
+    }
+  }
+  .contact-message {
+    textarea {
+      margin-left: 10px;
+      display: inline-block;
+      width: 20%;
+    }
+  }
 }

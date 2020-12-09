@@ -116,18 +116,63 @@ export default class Home extends Component {
             </div>
         </div>
         <div name="experience" className={styles["experience-section"]}>
+          Experience
           <Carousel interval={null} className={styles["experience-panel"]}>
             <Carousel.Item className={styles["experience-item"]}>
-              Company name. Position. Duration. Experience there. Skills used
-              asdasdasd
+              <div className={styles["experience-title"]}>
+                Fujifilm
+              </div>
+              <div className={styles["experience-position"]}>
+                Software Engineer Co-op
+              </div>
+              <div className={styles["experience-description"]}>
+                My task as an intern was to support the full-time developers in the maintenence of existing features and the development
+                of new features for a kiosk system. My responsibilities included performing bug fixes, communicating with quality assurance,
+                conducting code reviews, and picking up weekly tasks for creating new features. Completing tasks required me to
+                replicate the templates designed by the UI/UX team as well as implement the functionality communicated by the customer.
+              </div>
+              <div className={styles["experience-skills"]}>
+                Skills used: Javascript, HTML, Css, Vuejs, Nodejs, Agile, Documentation, Debugging
+              </div>
+              <div className={styles["experience-duration"]}>
+                3 months full time, 3 months part time
+              </div>
             </Carousel.Item>
             <Carousel.Item className={styles["experience-item"]}>
-              Company name. Position. Duration. Experience there. Skills used
-              qweqweqwe
+              <div className={styles["experience-title"]}>
+                The MITRE Corporation
+              </div>
+              <div className={styles["experience-position"]}>
+                description
+              </div>
+              <div className={styles["experience-description"]}>
+                description
+              </div>
+              <div className={styles["experience-skills"]}>
+                Skills used: Java, Vuejs, Javascript, Ubuntu, Docker, Git, Shell Scripts, Agile, Documentation
+              </div>
+              <div className={styles["experience-duration"]}>
+                3 months full time
+              </div>
             </Carousel.Item>
             <Carousel.Item className={styles["experience-item"]}>
-              Company name. Position. Duration. Experience there. Skills used
-              zxczxczxc
+              <div className={styles["experience-title"]}>
+                R.I.T. College of Computer Engineering
+              </div>
+              <div className={styles["experience-position"]}>
+                Research Assistant Co-op
+              </div>
+              <div className={styles["experience-description"]}>
+                The project I was assigned to was called ASSERT which was a program meant to utilize a Dynamic Bayesian Network to reveal
+                attack patterns and predict targets in a given network. My role as a research assistant was to optimize the calculations, perform
+                benchmark tests to reveal bottlenecks, and to employ new algorithms to enhance the statistical accuracy of the program.
+              </div>
+              <div className={styles["experience-skills"]}>
+                Skills used: Java, Git, Documentation, Debugging
+              </div>
+              <div className={styles["experience-duration"]}>
+                6 months full time, 6 months part-time
+              </div>
             </Carousel.Item>
           </Carousel>
         </div>
@@ -150,19 +195,19 @@ export default class Home extends Component {
           <div className={styles["contact-panel"]}>
             Contact Me
             <form method="POST" action="https://formspree.io/f/mwkwreoe" onSubmit={this.handleSubmit} noValidate>
-              <div className={styles["contact-name"]}>
-                name
-                <input type="text" name="name"></input>
+              <div className={["form-group", styles["contact-name"]].join(' ')}>
+                <label>name</label>
+                <input type="text" name="name" className="form-control" placeholder="Ex: John Doe"></input>
               </div>
-              <div className={styles["contact-email"]}>
-                email
-                <input type="email" name="email"></input>
+              <div className={["form-group", styles["contact-email"]].join(' ')}>
+                <label>email</label>
+                <input type="email" name="email" className="form-control" placeholder="name@example.com"></input>
               </div>
-              <div className={styles["contact-message"]}>
-                message
-                <input type="text" name="message"></input>
+              <div className={["form-group", styles["contact-message"]].join(' ')}>
+                <label>message</label>
+                <textarea type="text" name="message" className="form-control" rows="5" placeholder="Enter message here..."></textarea>
               </div>
-              <button>Submit</button>
+              <button className="btn btn-primary">Submit</button>
             </form>
           </div>
         </div>
