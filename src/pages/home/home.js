@@ -44,16 +44,22 @@ export default class Home extends Component {
       <div className={styles.home}>
         <div className={styles.banner}>
           <div className={styles["welcome-text"]}>
-            Welcome to my resume!
+            Hey, thanks for dropping in!
+            <a href="https://www.linkedin.com/in/kyle-ki/">
+              <img className={styles["linkedin-icon"]} src={process.env.PUBLIC_URL + '/assets/linkedin-icon.png'}></img>
+            </a>
           </div>
-          <div className={styles.blah}>
-            Some additional text. Add linked-in link
+          <div className={styles["welcome-description"]}>
+            My name is Kyle and I&apos;m a recent graduate of Rochester Institute of Technology. I am seeking an entry level position as a front-end or a full-stack developer.
           </div>
         </div>
         <div className={styles["scroll-down"]}>
-          <div className={styles.arrow}></div>
-          Scroll down for more info. (Text disappears as you scroll)
-          Text turns into a button and moves to the side to allow the user to return to the top quickly
+          <img className={styles.arrow1} src={process.env.PUBLIC_URL + '/assets/arrow.svg'}></img>
+          <img className={styles.arrow2} src={process.env.PUBLIC_URL + '/assets/arrow.svg'}></img>
+          <img className={styles.arrow3} src={process.env.PUBLIC_URL + '/assets/arrow.svg'}></img>
+          <img className={styles.arrow4} src={process.env.PUBLIC_URL + '/assets/arrow.svg'}></img>
+          <img className={styles.arrow5} src={process.env.PUBLIC_URL + '/assets/arrow.svg'}></img>
+          https://dev.to/chriseickemeyergh/building-custom-scroll-animations-using-react-hooks-4h6f
         </div>
         <div name="skills" className={styles["skills-section"]}>
           <div className={styles["skills-panel"]}>
@@ -65,7 +71,21 @@ export default class Home extends Component {
                 Front-end
               </div>
               <div className={styles["skill-item-description"]}>
-                css, html, javascript, vue, react
+                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS">
+                  <img className={styles["skill-icon"]} src={process.env.PUBLIC_URL + '/assets/css3-icon.svg'}></img>
+                </a>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">
+                  <img className={styles["skill-icon"]} src={process.env.PUBLIC_URL + '/assets/html5-icon.svg'}></img>
+                </a>
+                <a href="https://www.javascript.com/">
+                  <img className={styles["skill-icon"]} src={process.env.PUBLIC_URL + '/assets/javascript-icon.svg'}></img>
+                </a>
+                <a href="https://vuejs.org/">
+                  <img className={styles["skill-icon"]} src={process.env.PUBLIC_URL + '/assets/vuejs-icon.svg'}></img>
+                </a>
+                <a href="https://reactjs.org/">
+                  <img className={styles["skill-icon"]} src={process.env.PUBLIC_URL + '/assets/react-icon.svg'}></img>
+                </a>
               </div>
             </div>
             <div className={styles["skill-item"]}>
@@ -73,7 +93,12 @@ export default class Home extends Component {
                 Back-end
               </div>
               <div className={styles["skill-item-description"]}>
-                nodejs, express
+                <a href="https://nodejs.org/en/">
+                  <img className={styles["skill-icon"]} src={process.env.PUBLIC_URL + '/assets/nodejs-icon.svg'}></img>
+                </a>
+                <a href="https://expressjs.com/">
+                  <img className={styles["skill-icon"]} src={process.env.PUBLIC_URL + '/assets/express-icon.svg'}></img>
+                </a>
               </div>
             </div>
             <div className={styles["skill-item"]}>
@@ -81,7 +106,9 @@ export default class Home extends Component {
                 Version Control
               </div>
               <div className={styles["skill-item-description"]}>
-                git
+                <a href="https://git-scm.com/">
+                  <img className={styles["skill-icon"]} src={process.env.PUBLIC_URL + '/assets/git-icon.svg'}></img>
+                </a>
               </div>
             </div>
             This website was made as an introduction to React
