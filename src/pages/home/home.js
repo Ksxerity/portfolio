@@ -3,6 +3,18 @@ import Carousel from 'react-bootstrap/Carousel';
 import Tabs from 'react-bootstrap/tabs';
 import Tab from 'react-bootstrap/tab';
 import styles from './home.module.scss';
+import {
+  arrowIcon,
+  css3Icon,
+  expressIcon,
+  gitIcon,
+  html5Icon,
+  javascriptIcon,
+  linkedinIcon,
+  nodejsIcon,
+  reactIcon,
+  vuejsIcon
+} from '../../assets';
 
 export default class Home extends Component {
   constructor(props) {
@@ -46,7 +58,7 @@ export default class Home extends Component {
           <div className={styles["welcome-text"]}>
             Hey, thanks for dropping in!
             <a href="https://www.linkedin.com/in/kyle-ki/">
-              <img className={styles["linkedin-icon"]} src={process.env.PUBLIC_URL + '/assets/linkedin-icon.png'}></img>
+              <img className={styles["linkedin-icon"]} src={linkedinIcon}></img>
             </a>
           </div>
           <div className={styles["welcome-description"]}>
@@ -54,11 +66,11 @@ export default class Home extends Component {
           </div>
         </div>
         <div className={styles["scroll-down"]}>
-          <img className={styles.arrow1} src={process.env.PUBLIC_URL + '/assets/arrow.svg'}></img>
-          <img className={styles.arrow2} src={process.env.PUBLIC_URL + '/assets/arrow.svg'}></img>
-          <img className={styles.arrow3} src={process.env.PUBLIC_URL + '/assets/arrow.svg'}></img>
-          <img className={styles.arrow4} src={process.env.PUBLIC_URL + '/assets/arrow.svg'}></img>
-          <img className={styles.arrow5} src={process.env.PUBLIC_URL + '/assets/arrow.svg'}></img>
+          <img className={styles.arrow1} src={arrowIcon}></img>
+          <img className={styles.arrow2} src={arrowIcon}></img>
+          <img className={styles.arrow3} src={arrowIcon}></img>
+          <img className={styles.arrow4} src={arrowIcon}></img>
+          <img className={styles.arrow5} src={arrowIcon}></img>
           https://dev.to/chriseickemeyergh/building-custom-scroll-animations-using-react-hooks-4h6f
         </div>
         <div name="skills" className={styles["skills-section"]}>
@@ -72,19 +84,19 @@ export default class Home extends Component {
               </div>
               <div className={styles["skill-item-description"]}>
                 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS">
-                  <img className={styles["skill-icon"]} src={process.env.PUBLIC_URL + '/assets/css3-icon.svg'}></img>
+                  <img className={styles["skill-icon"]} src={css3Icon}></img>
                 </a>
                 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">
-                  <img className={styles["skill-icon"]} src={process.env.PUBLIC_URL + '/assets/html5-icon.svg'}></img>
+                  <img className={styles["skill-icon"]} src={html5Icon}></img>
                 </a>
                 <a href="https://www.javascript.com/">
-                  <img className={styles["skill-icon"]} src={process.env.PUBLIC_URL + '/assets/javascript-icon.svg'}></img>
+                  <img className={styles["skill-icon"]} src={javascriptIcon}></img>
                 </a>
                 <a href="https://vuejs.org/">
-                  <img className={styles["skill-icon"]} src={process.env.PUBLIC_URL + '/assets/vuejs-icon.svg'}></img>
+                  <img className={styles["skill-icon"]} src={vuejsIcon}></img>
                 </a>
                 <a href="https://reactjs.org/">
-                  <img className={styles["skill-icon"]} src={process.env.PUBLIC_URL + '/assets/react-icon.svg'}></img>
+                  <img className={styles["skill-icon"]} src={reactIcon}></img>
                 </a>
               </div>
             </div>
@@ -94,10 +106,10 @@ export default class Home extends Component {
               </div>
               <div className={styles["skill-item-description"]}>
                 <a href="https://nodejs.org/en/">
-                  <img className={styles["skill-icon"]} src={process.env.PUBLIC_URL + '/assets/nodejs-icon.svg'}></img>
+                  <img className={styles["skill-icon"]} src={nodejsIcon}></img>
                 </a>
                 <a href="https://expressjs.com/">
-                  <img className={styles["skill-icon"]} src={process.env.PUBLIC_URL + '/assets/express-icon.svg'}></img>
+                  <img className={styles["skill-icon"]} src={expressIcon}></img>
                 </a>
               </div>
             </div>
@@ -107,7 +119,7 @@ export default class Home extends Component {
               </div>
               <div className={styles["skill-item-description"]}>
                 <a href="https://git-scm.com/">
-                  <img className={styles["skill-icon"]} src={process.env.PUBLIC_URL + '/assets/git-icon.svg'}></img>
+                  <img className={styles["skill-icon"]} src={gitIcon}></img>
                 </a>
               </div>
             </div>
