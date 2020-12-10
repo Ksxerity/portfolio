@@ -20,6 +20,9 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      nameError: false,
+      emailError: false,
+      messageError: false
     }
   }
 
@@ -29,7 +32,8 @@ export default class Home extends Component {
 
     const form = e.target;
     const data = new FormData(form);
-    this.handleValidation(data);
+    console.log(data);
+    // this.handleValidation(data);
     // const xhr = new XMLHttpRequest();
     // xhr.open(form.method, form.action);
     // xhr.setRequestHeader("Accept", "application/json");
@@ -46,8 +50,28 @@ export default class Home extends Component {
   }
 
   handleValidation = (data) => {
+    // https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation
     for (const [key, val] of data.entries()) {
-      console.log(key + ',' + val)
+      switch (key) {
+        case 'name':
+          if (val === '') {
+            this.nameError = true;
+          } else {
+            this.nameError = false;
+          }
+          break;
+        case 'message':
+          if (val === '') {
+            this.messageError = true;
+          } else {
+            this.messageError = false;
+          }
+          break;
+        case 'email':
+          // Email needs a prefix, an @ sign, a domain name, and end with . followed by atleast 2 characters (ex: .com, .cc, .org)
+          this.handleEmailValidation(val);
+          break;
+      }
     }
   }
 
@@ -207,15 +231,15 @@ export default class Home extends Component {
           <div className={styles["contact-panel"]}>
             Contact Me
             <form method="POST" action="https://formspree.io/f/mwkwreoe" onSubmit={this.handleSubmit} noValidate>
-              <div className={["form-group", styles["contact-name"]].join(' ')}>
+              <div className={["form-group", styles["contact-item"]].join(' ')}>
                 <label>name</label>
-                <input type="text" name="name" className="form-control" placeholder="Ex: John Doe"></input>
+                <input type="text" name="name" className="form-control" placeholder="Ex: John Doe" maxLength="250"></input>
               </div>
-              <div className={["form-group", styles["contact-email"]].join(' ')}>
+              <div className={["form-group", styles["contact-item"]].join(' ')}>
                 <label>email</label>
-                <input type="email" name="email" className="form-control" placeholder="name@example.com"></input>
+                <input type="email" name="email" className="form-control" placeholder="name@example.com" maxLength="250"></input>
               </div>
-              <div className={["form-group", styles["contact-message"]].join(' ')}>
+              <div className={["form-group", styles["contact-item"]].join(' ')}>
                 <label>message</label>
                 <textarea type="text" name="message" className="form-control" rows="5" placeholder="Enter message here..."></textarea>
               </div>

@@ -100,16 +100,15 @@
 }
 
 .experience-section {
-  height: 60vh;
   display: flex;
   flex-direction: column;
   font-size: 4vw;
   align-items: center;
   background-color: grey;
   .experience-panel {
-    height: 80%;
     width: 80%;
     margin: 0 auto;
+    padding-bottom: 50px;
     .experience-item {
       width: 85%;
       padding-left: 15%;
@@ -150,25 +149,28 @@
 
 .contact-section {
   height: 60vh;
-  .contact-name {
-    input {
-      margin-left: 10px;
-      display: inline-block;
-      width: 20%;
-    }
-  }
-  .contact-email {
-    input {
-      margin-left: 10px;
-      display: inline-block;
-      width: 20%;
-    }
-  }
-  .contact-message {
-    textarea {
-      margin-left: 10px;
-      display: inline-block;
-      width: 20%;
+  width: 60%;
+  margin: 0 auto;
+  .contact-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .contact-item {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      label {
+        text-align: left;
+        width: 100px;
+      }
+      input {
+        margin-left: 10px;
+        width: 300px;
+      }
+      textarea {
+        margin-left: 10px;
+        width: 300px;
+      }
     }
   }
 }
