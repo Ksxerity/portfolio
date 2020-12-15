@@ -32,8 +32,7 @@ export default class Home extends Component {
 
     const form = e.target;
     const data = new FormData(form);
-    console.log(data);
-    // this.handleValidation(data);
+    this.handleValidation(data);
     // const xhr = new XMLHttpRequest();
     // xhr.open(form.method, form.action);
     // xhr.setRequestHeader("Accept", "application/json");
@@ -59,6 +58,9 @@ export default class Home extends Component {
           } else {
             this.nameError = false;
           }
+          this.setState({
+            nameError: this.nameError
+          });
           break;
         case 'message':
           if (val === '') {
@@ -66,11 +68,39 @@ export default class Home extends Component {
           } else {
             this.messageError = false;
           }
+          this.setState({
+            messageError: this.messageError
+          });
           break;
-        case 'email':
+        case 'email': {
           // Email needs a prefix, an @ sign, a domain name, and end with . followed by atleast 2 characters (ex: .com, .cc, .org)
-          this.handleEmailValidation(val);
+          let emailArr = val.split("@");
+          if (emailArr.length !== 2) {
+            // Check for one @ sign in email
+            this.emailError = true;
+          } else {
+            let domainName = emailArr[1].split(".");
+            if (emailArr[0] === "") {
+              // Check for a prefix with atleast 1 character
+              this.emailError = true;
+            } else if (domainName.length <= 1) {
+              // Check for a period
+              this.emailError = true;
+            } else if (domainName[0] === "") {
+              // Check for a domain name with atleast 1 character
+              this.emailError = true;
+            } else if (domainName[domainName.length - 1].length <= 1) {
+              // Check that the domain name ends with atleast two characters after the period
+              this.emailError = true;
+            } else {
+              this.emailError = false;
+            }
+          }
+          this.setState({
+            emailError: this.emailError
+          });
           break;
+        }
       }
     }
   }
@@ -232,16 +262,16 @@ export default class Home extends Component {
             Contact Me
             <form method="POST" action="https://formspree.io/f/mwkwreoe" onSubmit={this.handleSubmit} noValidate>
               <div className={["form-group", styles["contact-item"]].join(' ')}>
-                <label>name</label>
-                <input type="text" name="name" className="form-control" placeholder="Ex: John Doe" maxLength="250"></input>
+                <input type="text" id="contactName" name="name" className={"form-control " + (this.nameError ? styles["contact-item-error"] : null)} maxLength="250" placeholder="Name"></input>
+                <label htmlFor="contactName">Name</label>
               </div>
               <div className={["form-group", styles["contact-item"]].join(' ')}>
-                <label>email</label>
-                <input type="email" name="email" className="form-control" placeholder="name@example.com" maxLength="250"></input>
+                <input type="email" id="contactEmail" name="email" className={"form-control " + (this.emailError ? styles["contact-item-error"] : null)} maxLength="250" placeholder="Email"></input>
+                <label htmlFor="contactEmail">Email</label>
               </div>
               <div className={["form-group", styles["contact-item"]].join(' ')}>
-                <label>message</label>
-                <textarea type="text" name="message" className="form-control" rows="5" placeholder="Enter message here..."></textarea>
+                <textarea type="text" id="contactMessage" name="message" className={"form-control " + (this.messageError ? styles["contact-item-error"] : null)} rows="8" placeholder="Message"></textarea>
+                <label htmlFor="contactMessage">Message</label>
               </div>
               <button className="btn btn-primary">Submit</button>
             </form>

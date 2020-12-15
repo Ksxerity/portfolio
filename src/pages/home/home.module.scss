@@ -64,7 +64,7 @@
 }
 
 .skills-section {
-  height: 60vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -105,10 +105,11 @@
   font-size: 4vw;
   align-items: center;
   background-color: grey;
+  height: 100vh;
   .experience-panel {
     width: 80%;
     margin: 0 auto;
-    padding-bottom: 50px;
+    height: 30vw;
     .experience-item {
       width: 85%;
       padding-left: 15%;
@@ -138,7 +139,7 @@
 }
 
 .projects-section {
-  height: 60vh;
+  height: 100vh;
   padding-top: 50px;
   display: flex;
   justify-content: center;
@@ -148,28 +149,54 @@
 }
 
 .contact-section {
-  height: 60vh;
+  height: 70vh;
   width: 60%;
   margin: 0 auto;
   .contact-panel {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     .contact-item {
       display: flex;
-      flex-direction: row;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
       label {
+        position: absolute;
+        transform: translate(14px , 15px) scale(1);
+        width: 400px;
+        transform-origin: top left;
+        transition: all 0.2s ease-out;
         text-align: left;
-        width: 100px;
       }
       input {
-        margin-left: 10px;
-        width: 300px;
+        height: 56px;
+        width: 400px;
+      }
+      input::placeholder {
+        color: transparent;
+      }
+      input:not(:placeholder-shown) ~ label {
+        transform: translate(13px , 5px) scale(0.75);
+      }
+      input:not(:placeholder-shown) {
+        padding-top: 15px;
       }
       textarea {
-        margin-left: 10px;
-        width: 300px;
+        width: 400px;
+        padding-top: 15px;
+        padding-bottom: 5px;
+        resize: none;
+        overflow: auto;
+      }
+      textarea::placeholder {
+        color: transparent;
+      }
+      textarea:not(:placeholder-shown) ~ label {
+        transform: translate(13px , 5px) scale(0.75);
+        background-color: white;
+
+      }
+      textarea:not(:placeholder-shown) {
+        padding-top: 20px;
+        padding-bottom: 0px;
       }
     }
   }
