@@ -165,6 +165,7 @@
         transform-origin: top left;
         transition: all 0.2s ease-out;
         text-align: left;
+        color: lightblue;
       }
       input {
         height: 56px;
@@ -197,6 +198,15 @@
       textarea:not(:placeholder-shown) {
         padding-top: 20px;
         padding-bottom: 0px;
+      }
+      .contact-item-error {
+        border-color: red;
+        ~ label {
+          color: red;
+          &::after {
+            content: " (Invalid Entry)";
+          }
+        }
       }
     }
   }

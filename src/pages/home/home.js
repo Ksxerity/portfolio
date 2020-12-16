@@ -28,24 +28,20 @@ export default class Home extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
 
     const form = e.target;
     const data = new FormData(form);
     this.handleValidation(data);
-    // const xhr = new XMLHttpRequest();
-    // xhr.open(form.method, form.action);
-    // xhr.setRequestHeader("Accept", "application/json");
-    // xhr.onreadystatechange = () => {
-    //   if (xhr.readyState !== XMLHttpRequest.DONE) return;
-    //   if (xhr.status === 200) {
-    //     form.reset();
-    //     this.setState({ status: "SUCCESS" });
-    //   } else {
-    //     this.setState({ status: "ERROR" });
-    //   }
-    // };
-    // xhr.send(data);
+    const xhr = new XMLHttpRequest();
+    xhr.open(form.method, form.action);
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState !== XMLHttpRequest.DONE) return;
+      if (xhr.status === 200) {
+        form.reset();
+      }
+    };
+    xhr.send(data);
   }
 
   handleValidation = (data) => {
@@ -273,7 +269,7 @@ export default class Home extends Component {
                 <textarea type="text" id="contactMessage" name="message" className={"form-control " + (this.messageError ? styles["contact-item-error"] : null)} rows="8" placeholder="Message"></textarea>
                 <label htmlFor="contactMessage">Message</label>
               </div>
-              <button className="btn btn-primary">Submit</button>
+              <button className="btn btn-primary">Send</button>
             </form>
           </div>
         </div>
