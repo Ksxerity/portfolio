@@ -1,7 +1,8 @@
 import React, { useState, useLayoutEffect, useRef } from 'react';
+import { animateScroll as scroll } from 'react-scroll';
 import Carousel from 'react-bootstrap/Carousel';
-import Tabs from 'react-bootstrap/tabs';
-import Tab from 'react-bootstrap/tab';
+// import Tabs from 'react-bootstrap/tabs';
+// import Tab from 'react-bootstrap/tab';
 import styles from './home.module.scss';
 import {
   arrowIcon,
@@ -20,31 +21,34 @@ const Home = () => {
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [messageError, setMessageError] = useState(false);
-  const [show, doShow] = useState({
-    showScrollTopIcon: false
+  const [percentShown, setPercentShown] = useState({
+    scrollTopIcon: 1
   });
-  const ourRef = useRef(null);
+  const scrollSectionRef = useRef(null);
 
   useLayoutEffect(() => {
     // https://dev.to/chriseickemeyergh/building-custom-scroll-animations-using-react-hooks-4h6f
-    if (!ourRef.current) return
-    const topPosition = Math.ceil(ourRef.current.getBoundingClientRect().bottom);
+    if (!scrollSectionRef.current) return
+    const scrollSectionPos = Math.ceil(scrollSectionRef.current.getBoundingClientRect().bottom);
+
     const onScroll = () => {
       const scrollPosition = window.scrollY + window.innerHeight;
-      if (topPosition < scrollPosition) {
-        doShow(state => ({ ...state, showScrollTopIcon: true }));
-      } else {
-        doShow(state => ({ ...state, showScrollTopIcon: false }));
+      if (scrollSectionPos < scrollPosition) {
+        if (window.scrollY < 500) {
+          setPercentShown(state => ({ ...state, scrollTopIcon: (500 - Math.round(window.scrollY)) / 500 }));
+        } else {
+          setPercentShown(state => ({ ...state, scrollTopIcon: 0 }));
+        }
       }
     };
 
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
-    /* 
-       remove the event listener in the cleanup function 
-       to prevent memory leaks
-    */
   }, []);
+
+  const scrollToTop = () => {
+    scroll.scrollToTop();
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -122,26 +126,6 @@ const Home = () => {
     return valid;
   }
 
-  const ScrollDownDiv = () => {
-    return (
-      <div className={styles["scroll-down"]}>
-        <img className={styles.arrow1} src={arrowIcon}></img>
-        <img className={styles.arrow2} src={arrowIcon}></img>
-        <img className={styles.arrow3} src={arrowIcon}></img>
-        <img className={styles.arrow4} src={arrowIcon}></img>
-        <img className={styles.arrow5} src={arrowIcon}></img>
-      </div>
-    )
-  }
-
-  const ScrollTopDiv = () => {
-    return (
-      <div className={styles["scroll-top"]}>
-        <img className={styles.arrowUp} src={arrowIcon}></img>
-      </div>
-    )
-  }
-
   return (
     <div className={styles.home}>
       <div className={styles.banner}>
@@ -155,8 +139,12 @@ const Home = () => {
           My name is Kyle and I&apos;m a recent graduate of Rochester Institute of Technology. I am seeking an entry level position as a front-end or a full-stack developer.
           </div>
       </div>
-      <div ref={ourRef}>
-        {show.showScrollTopIcon ? <ScrollTopDiv /> : <ScrollDownDiv />}
+      <div className={styles["scroll-down"]} ref={scrollSectionRef}>
+        <div style={{ opacity: percentShown.scrollTopIcon }} className={styles["arrow-down"]}></div>
+        <div style={{ opacity: percentShown.scrollTopIcon }} className={styles["scroll-text"]}> Scroll Down</div>
+        <a onClick={scrollToTop}>
+          <img className={[styles.arrowUp, percentShown.scrollTopIcon === 0 ? styles.show : null].join(' ')} src={arrowIcon}></img>
+        </a>
       </div>
       <div name="skills" className={styles["skills-section"]}>
         <div className={styles["skills-panel"]}>
@@ -209,7 +197,6 @@ const Home = () => {
             </div>
           </div>
             This website was made as an introduction to React
-            https://www.digitalocean.com/community/tutorials/how-to-implement-smooth-scrolling-in-react
             </div>
       </div>
       <div name="experience" className={styles["experience-section"]}>
@@ -273,7 +260,7 @@ const Home = () => {
           </Carousel.Item>
         </Carousel>
       </div>
-      <div name="projects" className={styles["projects-section"]}>
+      {/* <div name="projects" className={styles["projects-section"]}>
         <div className={styles["projects-panel"]}>
           <Tabs>
             <Tab eventKey="project1" title="Project1">
@@ -287,7 +274,7 @@ const Home = () => {
             </Tab>
           </Tabs>
         </div>
-      </div>
+      </div> */}
       <div name="contact" className={styles["contact-section"]}>
         <div className={styles["contact-panel"]}>
           Contact Me
@@ -308,9 +295,6 @@ const Home = () => {
           </form>
         </div>
       </div>
-      <div>
-        Footer?
-        </div>
     </div>
   );
 }

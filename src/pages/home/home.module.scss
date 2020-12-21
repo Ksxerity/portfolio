@@ -1,6 +1,7 @@
 .home {
   text-align: center;
   position: relative;
+  background-color: lightgray;
 }
 
 .banner {
@@ -24,59 +25,51 @@
   }
 }
 
-@keyframes arrow {
-  0% {top: 0}
-  10% {top: 10px}
-  20% {top: 0}
-}
-
 .scroll-down {
+  display: flex;
+  justify-content: center;
   height: 4vh;
   margin-top: 1vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
   padding-bottom: 10px;
-  .arrow1 {
-    position: relative;
-    transform: rotate(270deg);
-    animation: arrow 4s linear infinite;
+  .arrow-down {
+    position: absolute;
+    &::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 5px;
+      left: 0;
+      transform: skew(0deg, -30deg);
+      background-color: black;
+    }
+    &::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 5px;
+      right: 0;
+      transform: skew(0deg, 30deg);
+      background-color: black;
+    }
   }
-  .arrow2 {
-    position: relative;
-    transform: rotate(270deg);
-    animation: arrow 4s 200ms linear infinite;
+  .scroll-text {
+    padding-top: 10px;
   }
-  .arrow3 {
-    position: relative;
-    transform: rotate(270deg);
-    animation: arrow 4s 400ms linear infinite;
-  }
-  .arrow4 {
-    position: relative;
-    transform: rotate(270deg);
-    animation: arrow 4s 600ms linear infinite;
-  }
-  .arrow5 {
-    position: relative;
-    transform: rotate(270deg);
-    animation: arrow 4s 800ms linear infinite;
-  }
-}
-
-.scroll-top {
-  position: fixed;
-  left: 92%;
-  top: 90%;
-  height: 75px;
-  width: 75px;
-  border: 3px solid black;
-  border-radius: 7px;
   .arrowUp {
-    margin-top: 10%;
-    height: 80%;
-    width: 80%;
-    transform: rotate(90deg);
+    position: fixed;
+    left: 92%;
+    top: 90%;
+    border: 3px solid black;
+    border-radius: 7px;
+    height: 60px;
+    width: 60px;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all .5s ease;
+    &.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
@@ -121,7 +114,6 @@
   flex-direction: column;
   font-size: 4vw;
   align-items: center;
-  background-color: grey;
   height: 100vh;
   .experience-panel {
     width: 80%;

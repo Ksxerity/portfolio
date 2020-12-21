@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Events, animateScroll as scroll } from 'react-scroll';
+import { Link, Events } from 'react-scroll';
 import styles from './navbar.module.scss';
 
 export default class Navbar extends Component {
@@ -16,9 +16,6 @@ export default class Navbar extends Component {
     Events.scrollEvent.remove('begin');
     Events.scrollEvent.remove('end');
   }
-  scrollToTop() {
-    scroll.scrollToTop();
-  }
   render() {
     return (
       <div>
@@ -29,9 +26,9 @@ export default class Navbar extends Component {
           <div className={['btn', styles.items].join(' ')}>
             <Link to="experience" spy={true} smooth={true} offset={0} duration={500}>Experience</Link>
           </div>
-          <div className={['btn', styles.items].join(' ')}>
+          {/* <div className={['btn', styles.items].join(' ')}>
             <Link to="projects" spy={true} smooth={true} offset={0} duration={500}>Projects</Link>
-          </div>
+          </div> */}
           <div className={['btn', styles.items].join(' ')}>
             <Link to="contact" spy={true} smooth={true} offset={0} duration={500}>Contact</Link>
           </div>
