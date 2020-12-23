@@ -22,14 +22,29 @@ const Home = () => {
   const [emailError, setEmailError] = useState(false);
   const [messageError, setMessageError] = useState(false);
   const [percentShown, setPercentShown] = useState({
-    scrollTopIcon: 1
+    scrollTopIcon: 1,
+    skillsSection: 0,
+    experienceSection: 0,
+    contactSection: 0
   });
   const scrollSectionRef = useRef(null);
+  const skillsSectionRef = useRef(null);
+  const experienceSectionRef = useRef(null);
+  const contactSectionRef = useRef(null);
 
   useLayoutEffect(() => {
     // https://dev.to/chriseickemeyergh/building-custom-scroll-animations-using-react-hooks-4h6f
     if (!scrollSectionRef.current) return
-    const scrollSectionPos = Math.ceil(scrollSectionRef.current.getBoundingClientRect().bottom);
+    const getTopPos = (ref) => {
+      return ref.current.getBoundingClientRect().top;
+    };
+    const getBottomPos = (ref) => {
+      return ref.current.getBoundingClientRect().bottom;
+    };
+    const scrollSectionPos = Math.ceil(getBottomPos(scrollSectionRef));
+    const skillsSectionPos = Math.ceil(getTopPos(skillsSectionRef) * 1.3);
+    const experienceSectionPos = Math.ceil(getTopPos(experienceSectionRef) * 1.25);
+    const contactSectionPos = Math.ceil(getTopPos(contactSectionRef) * 1.2);
 
     const onScroll = () => {
       const scrollPosition = window.scrollY + window.innerHeight;
@@ -39,6 +54,21 @@ const Home = () => {
         } else {
           setPercentShown(state => ({ ...state, scrollTopIcon: 0 }));
         }
+      }
+      if (skillsSectionPos < scrollPosition) {
+        setPercentShown(state => ({ ...state, skillsSection: 1 }));
+      } else {
+        setPercentShown(state => ({ ...state, skillsSection: 0 }));
+      }
+      if (experienceSectionPos < scrollPosition) {
+        setPercentShown(state => ({ ...state, experienceSection: 1 }));
+      } else {
+        setPercentShown(state => ({ ...state, experienceSection: 0 }));
+      }
+      if (contactSectionPos < scrollPosition) {
+        setPercentShown(state => ({ ...state, contactSection: 1 }));
+      } else {
+        setPercentShown(state => ({ ...state, contactSection: 0 }));
       }
     };
 
@@ -146,7 +176,7 @@ const Home = () => {
           <img className={[styles.arrowUp, percentShown.scrollTopIcon === 0 ? styles.show : null].join(' ')} src={arrowIcon}></img>
         </a>
       </div>
-      <div name="skills" className={styles["skills-section"]}>
+      <div name="skills" className={[styles["skills-section"], percentShown.skillsSection === 1 ? styles.show : null].join(' ')} ref={skillsSectionRef}>
         <div className={styles["skills-panel"]}>
           <div className={styles["skills-panel-description"]}>
             Below are some of the skills I have acquired as a student, intern, and hobbist.
@@ -199,7 +229,7 @@ const Home = () => {
             This website was made as an introduction to React
             </div>
       </div>
-      <div name="experience" className={styles["experience-section"]}>
+      <div name="experience" className={[styles["experience-section"], percentShown.experienceSection === 1 ? styles.show : null].join(' ')} ref={experienceSectionRef}>
         Experience
           <Carousel interval={null} className={styles["experience-panel"]}>
           <Carousel.Item className={styles["experience-item"]}>
@@ -227,10 +257,13 @@ const Home = () => {
               The MITRE Corporation
               </div>
             <div className={styles["experience-position"]}>
-              description
+              Software Engineer Co-op
               </div>
             <div className={styles["experience-description"]}>
-              description
+              I had the unique opportunity to work on several projects over the course of my internship at MITRE. This allowed me to
+              gain small experiences in using various technologies like Docker, Ubuntu, and Vue.js. I was able to cooperate with
+              other interns to share knowledge, collaborate on code development, and perform code reviews. Under the leadership
+              of our supervisor, my team participated in daily scrum meetings and conducted a final persentation for some of the employees.
               </div>
             <div className={styles["experience-skills"]}>
               Skills used: Java, Vuejs, Javascript, Ubuntu, Docker, Git, Shell Scripts, Agile, Documentation
@@ -275,7 +308,7 @@ const Home = () => {
           </Tabs>
         </div>
       </div> */}
-      <div name="contact" className={styles["contact-section"]}>
+      <div name="contact" className={[styles["contact-section"], percentShown.contactSection === 1 ? styles.show : null].join(' ')} ref={contactSectionRef}>
         <div className={styles["contact-panel"]}>
           Contact Me
             <form method="POST" action="https://formspree.io/f/mwkwreoe" onSubmit={handleSubmit} noValidate>
@@ -295,6 +328,7 @@ const Home = () => {
           </form>
         </div>
       </div>
+      <div className={styles.buffer}></div>
     </div>
   );
 }

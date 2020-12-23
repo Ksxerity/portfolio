@@ -52,9 +52,11 @@
       background-color: black;
     }
   }
+
   .scroll-text {
     padding-top: 10px;
   }
+
   .arrowUp {
     position: fixed;
     left: 92%;
@@ -66,19 +68,23 @@
     opacity: 0;
     transform: translateY(100px);
     transition: all .5s ease;
-    &.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 }
 
+.show {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
 .skills-section {
-  height: 100vh;
+  height: 60vh;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all .5s ease;
   .skills-panel {
     width: 80%;
     display: flex;
@@ -112,9 +118,13 @@
 .experience-section {
   display: flex;
   flex-direction: column;
-  font-size: 4vw;
+  justify-content: center;
   align-items: center;
-  height: 100vh;
+  font-size: 4vw;
+  height: 80vh;
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all .5s ease;
   .experience-panel {
     width: 80%;
     margin: 0 auto;
@@ -158,9 +168,15 @@
 }
 
 .contact-section {
-  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
   width: 60%;
   margin: 0 auto;
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all .5s ease;
   .contact-panel {
     .contact-item {
       display: flex;
@@ -219,4 +235,8 @@
       }
     }
   }
+}
+
+.buffer {
+  height: 100px;
 }
