@@ -2,6 +2,7 @@ import arrowIcon from './arrow.svg';
 import css3Icon from './css3-icon.svg';
 import expressIcon from './express-icon.svg';
 import gitIcon from './git-icon.svg';
+import githubMark from './github-mark.png';
 import html5Icon from './html5-icon.svg';
 import javascriptIcon from './javascript-icon.svg';
 import linkedinIcon from './linkedin-icon.png';
@@ -14,6 +15,7 @@ export {
   css3Icon,
   expressIcon,
   gitIcon,
+  githubMark,
   html5Icon,
   javascriptIcon,
   linkedinIcon,

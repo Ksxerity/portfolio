@@ -11,7 +11,6 @@ import {
   gitIcon,
   html5Icon,
   javascriptIcon,
-  linkedinIcon,
   nodejsIcon,
   reactIcon,
   vuejsIcon
@@ -161,9 +160,6 @@ const Home = () => {
       <div className={styles.banner}>
         <div className={styles["welcome-text"]}>
           Hey, thanks for dropping in!
-            <a href="https://www.linkedin.com/in/kyle-ki/">
-            <img className={styles["linkedin-icon"]} src={linkedinIcon}></img>
-          </a>
         </div>
         <div className={styles["welcome-description"]}>
           My name is Kyle and I&apos;m a recent graduate of Rochester Institute of Technology. I am seeking an entry level position as a front-end or a full-stack developer.
@@ -171,7 +167,7 @@ const Home = () => {
       </div>
       <div className={styles["scroll-down"]} ref={scrollSectionRef}>
         <div style={{ opacity: percentShown.scrollTopIcon }} className={styles["arrow-down"]}></div>
-        <div style={{ opacity: percentShown.scrollTopIcon }} className={styles["scroll-text"]}> Scroll Down</div>
+        <div style={{ opacity: percentShown.scrollTopIcon }} className={styles["scroll-text"]}>Read More</div>
         <a onClick={scrollToTop}>
           <img className={[styles.arrowUp, percentShown.scrollTopIcon === 0 ? styles.show : null].join(' ')} src={arrowIcon}></img>
         </a>

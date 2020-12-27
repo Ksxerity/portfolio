@@ -1,7 +1,8 @@
 .home {
   text-align: center;
   position: relative;
-  background-color: lightgray;
+  background: #D1E9FF;
+  color: #5E5E5E;
 }
 
 .banner {
@@ -9,28 +10,25 @@
   justify-content: center;
   flex-direction: column;
   height: 90vh;
-  width: 60%;
-  margin: 0 auto;
   text-align: left;
   .welcome-text {
+    width: 80%;
+    margin: 0 auto;
     font-size: 4vw;
     font-style: oblique;
   }
   .welcome-description {
+    width: 80%;
+    margin: 0 auto;
     font-size: 1.5vw;
-  }
-  .linkedin-icon {
-    height: 1.5em;
-    float: right;
   }
 }
 
 .scroll-down {
   display: flex;
   justify-content: center;
-  height: 4vh;
-  margin-top: 1vh;
-  padding-bottom: 10px;
+  height: 5vh;
+  padding-top: 1vh;
   .arrow-down {
     position: absolute;
     &::after {
@@ -190,7 +188,6 @@
         transform-origin: top left;
         transition: all 0.2s ease-out;
         text-align: left;
-        color: lightblue;
       }
       input {
         height: 56px;
