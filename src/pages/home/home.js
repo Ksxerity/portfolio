@@ -1,22 +1,24 @@
 import React, { useState, useLayoutEffect, useRef } from 'react';
 import { animateScroll as scroll } from 'react-scroll';
-import Carousel from 'react-bootstrap/Carousel';
-// import Tabs from 'react-bootstrap/tabs';
-// import Tab from 'react-bootstrap/tab';
+import { Carousel, Modal, Tabs, Tab } from 'react-bootstrap';
 import styles from './home.module.scss';
 import {
   arrowIcon,
   css3Icon,
+  discordIcon,
   expressIcon,
   gitIcon,
   html5Icon,
   javascriptIcon,
   nodejsIcon,
   reactIcon,
+  rhythmTrainerScreenshot,
   vuejsIcon
 } from '../../assets';
 
 const Home = () => {
+  const [show, setShow] = useState(false);
+  const [imgSrc, setImgSrc] = useState(rhythmTrainerScreenshot);
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [messageError, setMessageError] = useState(false);
@@ -24,11 +26,13 @@ const Home = () => {
     scrollTopIcon: 1,
     skillsSection: 0,
     experienceSection: 0,
+    projectsSection: 0,
     contactSection: 0
   });
   const scrollSectionRef = useRef(null);
   const skillsSectionRef = useRef(null);
   const experienceSectionRef = useRef(null);
+  const projectsSectionRef = useRef(null);
   const contactSectionRef = useRef(null);
 
   useLayoutEffect(() => {
@@ -43,7 +47,8 @@ const Home = () => {
     const scrollSectionPos = Math.ceil(getBottomPos(scrollSectionRef));
     const skillsSectionPos = Math.ceil(getTopPos(skillsSectionRef) * 1.3);
     const experienceSectionPos = Math.ceil(getTopPos(experienceSectionRef) * 1.25);
-    const contactSectionPos = Math.ceil(getTopPos(contactSectionRef) * 1.2);
+    const projectsSectionPos = Math.ceil(getTopPos(projectsSectionRef) * 1.25);
+    const contactSectionPos = Math.ceil(getTopPos(contactSectionRef) * 1.15);
 
     const onScroll = () => {
       const scrollPosition = window.scrollY + window.innerHeight;
@@ -63,6 +68,11 @@ const Home = () => {
         setPercentShown(state => ({ ...state, experienceSection: 1 }));
       } else {
         setPercentShown(state => ({ ...state, experienceSection: 0 }));
+      }
+      if (projectsSectionPos < scrollPosition) {
+        setPercentShown(state => ({ ...state, projectsSection: 1 }));
+      } else {
+        setPercentShown(state => ({ ...state, projectsSection: 0 }));
       }
       if (contactSectionPos < scrollPosition) {
         setPercentShown(state => ({ ...state, contactSection: 1 }));
@@ -155,6 +165,20 @@ const Home = () => {
     return valid;
   }
 
+  const handleShow = () => {
+    setShow(true);
+  }
+
+  const handleHide = () => {
+    setShow(false);
+  }
+
+  const handleTabClick = (e) => {
+    if (e.name === 'rhythmTrainerScreenshot') {
+      setImgSrc(rhythmTrainerScreenshot)
+    }
+  }
+
   return (
     <div className={styles.home}>
       <div className={styles.banner}>
@@ -227,7 +251,12 @@ const Home = () => {
       </div>
       <div name="experience" className={[styles["experience-section"], percentShown.experienceSection === 1 ? styles.show : null].join(' ')} ref={experienceSectionRef}>
         Experience
-          <Carousel interval={null} className={styles["experience-panel"]}>
+          <Carousel
+          interval={null}
+          className={styles["experience-panel"]}
+          nextIcon={<span aria-hidden="true" className={["carousel-control-next-icon", styles["custom-control-next-icon"]].join(' ')} />}
+          prevIcon={<span aria-hidden="true" className={["carousel-control-prev-icon", styles["custom-control-prev-icon"]].join(' ')} />}
+        >
           <Carousel.Item className={styles["experience-item"]}>
             <div className={styles["experience-title"]}>
               Fujifilm
@@ -289,21 +318,66 @@ const Home = () => {
           </Carousel.Item>
         </Carousel>
       </div>
-      {/* <div name="projects" className={styles["projects-section"]}>
+      <div name="projects" className={[styles["projects-section"], percentShown.projectsSection === 1 ? styles.show : null].join(' ')} ref={projectsSectionRef}>
         <div className={styles["projects-panel"]}>
+          <Modal show={show} onHide={handleHide} dialogClassName={styles["modal-90w"]}>
+            <Modal.Body>
+              <img className={styles["modal-image"]} src={imgSrc}></img>
+            </Modal.Body>
+          </Modal>
           <Tabs>
-            <Tab eventKey="project1" title="Project1">
-              Project 1
+            <Tab eventKey="project1" title="Playful Discord Bot" className={styles["project-item"]}>
+              <img className={styles["project-screenshot"]} src={discordIcon}></img>
+              <div className={styles["project-description"]}>
+                The playful discord bot is a customized bot used in my private discord channel with my friends. Playful was
+                configured to mimic basic functions from other bots we used (like listening to music) and provide additional
+                functionality that catered to the type of activities we enjoyed.
+                <div>
+                  The bot is able to:
+                </div>
+                <ul>
+                  <li>Play music via youtube links</li>
+                  <ul>
+                    <li>It accepts video links as well as playlist links</li>
+                  </ul>
+                  <li>Associate images uploaded by users with a specific command so that they can be easily brought up in reaction to situations</li>
+                  <li>Make note entries to easily document amusing moments</li>
+                </ul>
+                The images and notes are saved to Amazon&apos;s S3 simple cloud storage so that they could be pulled from anywhere regardless
+                of how the server was being run (Locally or through a hosting site like Heroku).
+              </div>
+              <div className={styles["project-skills"]}>
+                Skills used: Javascript, Node.js, API, Git, AWS S3
+              </div>
             </Tab>
-            <Tab eventKey="project2" title="Project2">
-              Project 2
-            </Tab>
-            <Tab eventKey="project3" title="Project3">
-              Project 3
+            <Tab eventKey="project2" title="Rhythm Trainer" className={styles["project-item"]} name="rhythmTrainerScreenshot" onClick={handleTabClick}>
+              <a className={styles["project-screenshot"]} onClick={handleShow}>
+                <img src={rhythmTrainerScreenshot}></img>
+              </a>
+              <div className={styles["project-description"]}>
+                A simple arrow key input sequence training tool. A randomly generated sequence of directional keys will be shown on the
+                screen and the user will have to input the sequence as fast as they can.
+                <div>
+                  The tool comes with a few advanced settings such as:
+                </div>
+                <ul>
+                  <li>Reverse Keys</li>
+                  <ul>
+                    <li>Allows the generation of red arrow keys that require the user to input the opposite direction shown</li>
+                  </ul>
+                  <li>Eight Keys</li>
+                  <ul>
+                    <li>Allows the generation of diagonal keys for a total of eight different types of input</li>
+                  </ul>
+                </ul>
+              </div>
+              <div className={styles["project-skills"]}>
+                Skills used: React, Javascript, Git, HTML, Scss
+              </div>
             </Tab>
           </Tabs>
         </div>
-      </div> */}
+      </div>
       <div name="contact" className={[styles["contact-section"], percentShown.contactSection === 1 ? styles.show : null].join(' ')} ref={contactSectionRef}>
         <div className={styles["contact-panel"]}>
           Contact Me
