@@ -37,6 +37,10 @@ const Home = () => {
   const projectsSectionRef = useRef(null);
   const contactSectionRef = useRef(null);
 
+  window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+  }
+
   useLayoutEffect(() => {
     // https://dev.to/chriseickemeyergh/building-custom-scroll-animations-using-react-hooks-4h6f
     if (!scrollSectionRef.current) return
