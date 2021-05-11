@@ -1,4 +1,6 @@
 import arrowIcon from './arrow.svg';
+import choiceWheelModalScreenshot from './choice-wheel-modal-screenshot.png';
+import choiceWheelScreenshot from './choice-wheel-screenshot.png';
 import css3Icon from './css3-icon.svg';
 import discordIcon from './discord-icon.svg';
 import expressIcon from './express-icon.svg';
@@ -14,6 +16,8 @@ import vuejsIcon from './vuejs-icon.svg';
 
 export {
   arrowIcon,
+  choiceWheelModalScreenshot,
+  choiceWheelScreenshot,
   css3Icon,
   discordIcon,
   expressIcon,

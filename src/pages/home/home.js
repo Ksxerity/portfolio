@@ -4,6 +4,8 @@ import { Carousel, Modal, Tabs, Tab } from 'react-bootstrap';
 import styles from './home.module.scss';
 import {
   arrowIcon,
+  choiceWheelModalScreenshot,
+  choiceWheelScreenshot,
   css3Icon,
   discordIcon,
   expressIcon,
@@ -102,7 +104,10 @@ const Home = () => {
       xhr.onreadystatechange = () => {
         if (xhr.readyState !== XMLHttpRequest.DONE) return;
         if (xhr.status === 200) {
+          alert('Email successfully sent.');
           form.reset();
+        } else {
+          alert('There was an error sending the message.');
         }
       };
       xhr.send(data);
@@ -165,18 +170,23 @@ const Home = () => {
     return valid;
   }
 
-  const handleShow = () => {
+  const handleShow = (imgName) => {
+    switch (imgName) {
+      case 'rhythmTrainerScreenshot':
+        setImgSrc(rhythmTrainerScreenshot)
+        break;
+      case 'choiceWheelScreenshot':
+        setImgSrc(choiceWheelScreenshot)
+        break;
+      case 'choiceWheelModalScreenshot':
+        setImgSrc(choiceWheelModalScreenshot)
+        break;
+    }
     setShow(true);
   }
 
   const handleHide = () => {
     setShow(false);
-  }
-
-  const handleTabClick = (e) => {
-    if (e.name === 'rhythmTrainerScreenshot') {
-      setImgSrc(rhythmTrainerScreenshot)
-    }
   }
 
   return (
@@ -350,9 +360,9 @@ const Home = () => {
                 Skills used: Javascript, Node.js, API, Git, AWS S3
               </div>
             </Tab>
-            <Tab eventKey="project2" title="Rhythm Trainer" className={styles["project-item"]} name="rhythmTrainerScreenshot" onClick={handleTabClick}>
-              <a className={styles["project-screenshot"]} onClick={handleShow}>
-                <img src={rhythmTrainerScreenshot}></img>
+            <Tab eventKey="project2" title="Rhythm Trainer" className={styles["project-item"]}>
+              <a className={styles["project-screenshot"]}>
+                <img src={rhythmTrainerScreenshot} onClick={() => handleShow('rhythmTrainerScreenshot')}></img>
               </a>
               <div className={styles["project-description"]}>
                 A simple arrow key input sequence training tool. A randomly generated sequence of directional keys will be shown on the
@@ -372,7 +382,42 @@ const Home = () => {
                 </ul>
               </div>
               <div className={styles["project-skills"]}>
-                Skills used: React, Javascript, Git, HTML, Scss
+                Skills used: React, Javascript, Git, HTML, SCSS
+              </div>
+            </Tab>
+            <Tab eventKey="project3" title="Choice Wheel" className={styles["project-item"]}>
+              <a className={styles["project-screenshot"]}>
+                <img src={choiceWheelScreenshot} onClick={() => handleShow('choiceWheelScreenshot')}></img>
+                <img src={choiceWheelModalScreenshot} onClick={() => handleShow('choiceWheelModalScreenshot')}></img>
+              </a>
+              <div className={styles["project-description"]}>
+                The choice wheel is a spinning circle made up of equal sized wedges that can be used to make selections randomly.
+                <div>
+                  Main features:
+                </div>
+                <ul>
+                  <li>
+                    The number of entries on the wheel can be altered via an add/remove
+                    button and the wheel will adjust the size of each wedge accordingly.
+                  </li>
+                  <li>
+                    A random position on the wheel will be calculated when the user clicks
+                    on the wheel and the winning entry will be displayed via a modal.
+                  </li>
+                  <li>
+                    The wedge dimensions and angles are calculated with javascript and injected into the styles by css-variables.
+                  </li>
+                  <li>
+                    Similarly, the calculated rotation is introduced into the css by finding
+                    the keyframes and appending new rules into it through javascript.
+                  </li>
+                  <li>
+                    The javascript framework I picked was Vue.js while bootstrap and jquery were used to display the modal.
+                  </li>
+                </ul>
+              </div>
+              <div className={styles["project-skills"]}>
+                Skills used: Vue.js, Javascript, HTML, CSS, CSS-variables, Git
               </div>
             </Tab>
           </Tabs>
