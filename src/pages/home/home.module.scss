@@ -171,6 +171,9 @@
   transition: all .5s ease;
   .projects-panel {
     width: 50%;
+    a {
+      font-size: 1.75vh;
+    }
     .project-item{
       .project-screenshot {
         max-width: 50%;

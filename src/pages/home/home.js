@@ -42,19 +42,22 @@ const Home = () => {
   }
 
   useLayoutEffect(() => {
-    // https://dev.to/chriseickemeyergh/building-custom-scroll-animations-using-react-hooks-4h6f
     if (!scrollSectionRef.current) return
     const getTopPos = (ref) => {
-      return ref.current.getBoundingClientRect().top;
+      const pos = ref.current.getBoundingClientRect().top;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      return pos + scrollTop
     };
     const getBottomPos = (ref) => {
-      return ref.current.getBoundingClientRect().bottom;
+      const pos = ref.current.getBoundingClientRect().bottom;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      return pos + scrollTop
     };
-    const scrollSectionPos = Math.ceil(getBottomPos(scrollSectionRef));
-    const skillsSectionPos = Math.ceil(getTopPos(skillsSectionRef) * 1.3);
-    const experienceSectionPos = Math.ceil(getTopPos(experienceSectionRef) * 1.25);
-    const projectsSectionPos = Math.ceil(getTopPos(projectsSectionRef) * 1.25);
-    const contactSectionPos = Math.ceil(getTopPos(contactSectionRef) * 1.15);
+    let scrollSectionPos = Math.ceil(getBottomPos(scrollSectionRef));
+    let skillsSectionPos = Math.ceil(getTopPos(skillsSectionRef) * 1.3);
+    let experienceSectionPos = Math.ceil(getTopPos(experienceSectionRef) * 1.25);
+    let projectsSectionPos = Math.ceil(getTopPos(projectsSectionRef) * 1.25);
+    let contactSectionPos = Math.ceil(getTopPos(contactSectionRef) * 1.15);
 
     const onScroll = () => {
       const scrollPosition = window.scrollY + window.innerHeight;
@@ -87,8 +90,25 @@ const Home = () => {
       }
     };
 
+    let resizeId;
+    const onResize = () => {
+      clearTimeout(resizeId);
+      resizeId = setTimeout(() => {
+        scrollSectionPos = Math.ceil(getBottomPos(scrollSectionRef));
+        skillsSectionPos = Math.ceil(getTopPos(skillsSectionRef) * 1.3);
+        experienceSectionPos = Math.ceil(getTopPos(experienceSectionRef) * 1.25);
+        projectsSectionPos = Math.ceil(getTopPos(projectsSectionRef) * 1.25);
+        contactSectionPos = Math.ceil(getTopPos(contactSectionRef) * 1.15);
+        onScroll();
+      }, 500);
+    };
+
     window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener('resize', onResize);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener('resize', onResize);
+    };
   }, []);
 
   const scrollToTop = () => {
